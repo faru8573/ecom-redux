@@ -50,10 +50,10 @@ export const logOutUserThunk = createAsyncThunk(
   "logout/user",
   async (_, thunkAPI) => {
     try {
-      await signOut();
+      await signOut(auth);
       thunkAPI.dispatch(authActions.clearAuth());
     } catch (error) {
-      console.log("error while sign in user", error);
+      console.log("error while sign out user", error);
       thunkAPI.dispatch(authActions.setError(error.message));
       return thunkAPI.rejectWithValue(
         "Something went wrong, please try again later"

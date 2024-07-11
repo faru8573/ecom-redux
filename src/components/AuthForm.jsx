@@ -5,9 +5,12 @@ import {
   signInUserThunk,
   signUpUserThunk,
 } from "../redux/reducers/auth.reducer";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const AuthForm = () => {
   const [isRegistering, setIsRegistering] = useState(false);
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     username: "",
@@ -34,9 +37,13 @@ const AuthForm = () => {
     }
     if (isRegistering) {
       dispatch(signUpUserThunk(formData));
+      toast.success("signed up successful");
+      navigate("/");
       setIsRegistering(false);
     } else {
       dispatch(signInUserThunk(formData));
+      navigate("/");
+      toast.success("signed in successful");
     }
   }
 
